@@ -1,0 +1,50 @@
+version: '2'
+
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - '8080:80'
+    volumes:
+      - ./superheroes:/project
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      superheroes_net:
+        ipv4_address: 172.27.0.2
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./superheroes:/project
+    networks:
+      superheroes_net:
+        ipv4_address: 172.27.0.4
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306"
+    volumes:
+      - mysqldata2:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: superheroes_app
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    networks:
+      superheroes_net:
+        ipv4_address: 172.27.0.6
+
+networks:
+  superheroes_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.27.0.0/16
+          gateway: 172.27.0.1
+
+volumes:
+  mysqldata2:
+    driver: local

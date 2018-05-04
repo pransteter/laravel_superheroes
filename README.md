@@ -1,25 +1,35 @@
-ne Paragraph of project description goes here
+Basic application with a simple CRUD of Heroes using Laravel Framework.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+You'll need to install docker, PHP and composer.
+Here, as we can install using the debian bash:
 
+Docker:
 ```
-Give examples
+sudo apt-get install docker docker-compose docker.io
+```
+
+Php7.0 (necessary to use Composer)
+```
+sudo apt-get php7.0
+```
+
+Composer
+```
+sudo apt-get composer
 ```
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
+Firstly you need to create an environment to run it. So, inside laravel_superheroes folder, using the bash, hit this:
 
 ```
-Give the example
+sudo docker-compose up
 ```
 
 And repeat
