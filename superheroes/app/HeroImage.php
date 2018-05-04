@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class HeroImage extends Model
 {
-    public function images()
+    public function hero()
     {
         return $this->belongsTo('App\Hero');
     }
