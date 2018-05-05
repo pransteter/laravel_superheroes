@@ -25,7 +25,7 @@ class HeroController extends Controller
      */
     public function create()
     {
-        //
+        return view('hero.create');
     }
 
     /**
@@ -36,7 +36,19 @@ class HeroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $hero = new Hero;
+
+        $hero->nickname           = $request->nickname;
+        $hero->real_name          = $request->real_name;
+        $hero->origin_description = $request->origin_description;
+        $hero->superpowers        = $request->superpowers;
+        $hero->catch_phrase       = $request->catch_phrase;
+
+        $hero->save();
+
+        $request->session()->flash('alert-success', 'Hero was created correctly!');
+
+        return redirect()->route('hero.index');
     }
 
     /**
@@ -45,11 +57,9 @@ class HeroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Hero $hero)
     {
-        $hero = Hero::with('images')->where('id', $id)->get();
-        echo '<pre>';
-        return json_encode($hero, JSON_PRETTY_PRINT);
+        return view('hero.view', compact('hero'));
     }
 
     /**
@@ -58,9 +68,9 @@ class HeroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Hero $hero)
     {
-        //
+        return view('hero.edit', compact('hero'));
     }
 
     /**
@@ -70,9 +80,19 @@ class HeroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Hero $hero)
     {
-        //
+        $hero->nickname           = $request->nickname;
+        $hero->real_name          = $request->real_name;
+        $hero->origin_description = $request->origin_description;
+        $hero->superpowers        = $request->superpowers;
+        $hero->catch_phrase       = $request->catch_phrase;
+
+        $hero->save();
+
+        $request->session()->flash('alert-success', 'Hero was edited correctly!');
+
+        return redirect()->route('hero.index');
     }
 
     /**
@@ -81,8 +101,10 @@ class HeroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Hero $hero)
     {
-        //
+        $hero->delete();
+        $request->session()->flash('alert-success', 'Hero was deleted correctly.');
+        return redirect()->route('hero.index');
     }
 }

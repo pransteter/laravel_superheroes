@@ -30,12 +30,12 @@
             <div class="navbar-header">
 
                 <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                     <span class="sr-only">Toggle Navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button>
+                </button> -->
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -50,7 +50,7 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
-                   <li><a href="{{ url('/hero') }}">Heroes</a></li>
+                   <li><a style="color: #558efd" href="{{ url('/hero/create') }}">Add new hero</a></li>
                 </ul>
             </div>
         </div>
