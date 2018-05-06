@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Hero;
+use App\HeroImage;
 use Illuminate\Http\Request;
 
 class HeroController extends Controller
@@ -14,7 +15,8 @@ class HeroController extends Controller
      */
     public function index()
     {
-        $heroes = Hero::with('images')->get();
+        $heroes = Hero::with('images')->paginate(5);
+
         return view('hero.index', compact('heroes'));
     }
 
@@ -45,6 +47,10 @@ class HeroController extends Controller
         $hero->catch_phrase       = $request->catch_phrase;
 
         $hero->save();
+
+        if (isset($request->images) && is_array($request->images) && count($request->images) > 0) {
+            $hero->saveImages($request->images);
+        }
 
         $request->session()->flash('alert-success', 'Hero was created correctly!');
 
@@ -90,6 +96,10 @@ class HeroController extends Controller
 
         $hero->save();
 
+        if (isset($request->images) && is_array($request->images) && count($request->images) > 0) {
+            $hero->saveImages($request->images);
+        }
+
         $request->session()->flash('alert-success', 'Hero was edited correctly!');
 
         return redirect()->route('hero.index');
@@ -104,7 +114,9 @@ class HeroController extends Controller
     public function destroy(Request $request, Hero $hero)
     {
         $hero->delete();
+
         $request->session()->flash('alert-success', 'Hero was deleted correctly.');
+
         return redirect()->route('hero.index');
     }
 }

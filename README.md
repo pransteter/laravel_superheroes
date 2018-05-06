@@ -67,17 +67,26 @@ sudo php artisan migrate
 Access through the url/ip:
 http://172.27.0.2
 
+If you need/want some data to check the functionalities, you can use the factory `HeroImage` to create fake data on database:
+```
+* Access the tinker from Laravel (inside laravel_superheroes/superheroes/ directory):
+sudo php artisan tinker
+
+* Run the factory create method (This will create 30 HeroImages and 30 Heroes):
+factory(App\HeroImage::class, 30)->create()
+```
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+We just need to run this code on bash to execute all the Hero tests (inside laravel_superheroes/superheroes/ directory)::
+```
+vendor/bin/phpunit
+```
 
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Laravel](https://laravel.com) - The PHP framework used
 
 ## Authors
 

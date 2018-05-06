@@ -32,6 +32,7 @@
 				@endforeach
 			</tbody>
 		</table>
+		{{ $heroes->links() }}
 	</div>
 </div>
 @endsection

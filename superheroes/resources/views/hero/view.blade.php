@@ -30,6 +30,16 @@
           <td>Catch phrase:</td>
           <td>{{ $hero->catch_phrase }}</td>
         </tr>
+        @if (count($hero->images) > 0)
+        <tr>
+          <td>Images:</td>
+          <td>
+            @foreach ($hero->images as $image)
+              <img title="{{ $image->title }}" src="{{ $image->src }}" />
+            @endforeach
+          </td>
+        </tr>
+        @endif
       </tbody>
     </table>
     <a href="{{ url('hero') }}" class="btn btn-info"> Back </a>

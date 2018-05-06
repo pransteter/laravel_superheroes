@@ -21,7 +21,7 @@ class CreateHeroImagesTable extends Migration
             $table->integer('hero_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('hero_id')->references('id')->on('heroes');
+            $table->foreign('hero_id')->references('id')->on('heroes')->onDelete('cascade');;
         });
     }
 

@@ -1,5 +1,10 @@
 @extends('layouts.app')
 @section('content')
+  <style>
+    .heroes-image-input {
+      margin: 5px 0;
+    }
+  </style>
   <div class="row center-block">
     <div class="col-sm-4">
       <form method="post" action="{{ action('HeroController@update', $hero->id) }}">
@@ -25,8 +30,38 @@
           <label for="catch_phrase">Catch phrase:</label>
           <input id="catch_phrase" type="text" name="catch_phrase" class="form-control" value="{{ $hero->catch_phrase or '' }}">
         </div>
-        <button type="submit" class="btn btn-success">Submit</button>
+        <div id="image-container" class="form-group">
+          <button id="image-add-button" type="button" class="btn btn-success">Add image</button>
+          @if (count($hero->images) > 0)
+            @foreach ($hero->images as $key => $image)
+              <input class="form-control heroes-image-input" placeholder="Insert the image url here. Leave the field empty if you don't" name="images[{{ $key - 1 }}]" value="{{ $image->src }}" />
+            @endforeach
+          @endif
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="{{ url('hero') }}" class="btn btn-info"> Back </a>
       </form>
     </div>
   </div>
+  <script>
+    /* I know that I did should to make something better here but unfortunately I haven't time to do. =\ Sorry guys! */
+    var currentInputNumber = {{ count($hero->images) }};
+
+    var addImageInput = function() {
+      var input = document.createElement('input');
+
+      input.id = 'image-input' + currentInputNumber;
+      input.name = 'images[' + currentInputNumber + ']';
+      input.placeholder = 'Insert the image url here. Leave the field empty if you don\'t';
+      input.classList.add('form-control');
+      input.classList.add('heroes-image-input');
+
+      document.getElementById('image-container').appendChild(input);
+
+      currentInputNumber++;
+    }
+
+    document.getElementById('image-add-button').addEventListener("click", addImageInput);
+
+  </script>
 @endsection
