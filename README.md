@@ -41,7 +41,7 @@ sudo composer install
 ```
 
 We need to start the database configuration. So we need to access the mysql container,
-create a database and enable a global setting to avoid the migration process:
+create a database and enable a global variable (FOREIGN_KEY_CHECKS) that can avoid the migration process of laravel:
 
 ```
 *Accessing:
